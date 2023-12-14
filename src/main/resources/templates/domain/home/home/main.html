@@ -6,6 +6,16 @@
 
 <div layout:fragment="content">
     <h1>메인</h1>
+
+    <h2>최신 게시물</h2>
+
+    <ul>
+        <li th:each="post : ${posts}">
+            <a th:href="|/post/${post.id}|" th:text="${post.title}"></a>
+        </li>
+    </ul>
+
+    <a th:href="@{/post/write}" class="btn btn-primary">글 작성하기</a>
 </div>
 
 </html>

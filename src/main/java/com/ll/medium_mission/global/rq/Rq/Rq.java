@@ -1,6 +1,7 @@
 package com.ll.medium_mission.global.rq.Rq;
 
 import com.ll.medium_mission.global.rsData.RsData.RsData;
+import com.ll.medium_mission.standard.util.Ut.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -74,5 +75,21 @@ public class Rq {
                 .getAuthorities()
                 .stream()
                 .anyMatch(it -> it.getAuthority().equals("ROLE_ADMIN"));
+    }
+
+    public void setAttribute(String key, Object value) {
+        request.setAttribute(key, value);
+    }
+
+    public String getCurrentQueryStringWithoutParam(String paramName) {
+        String queryString = request.getQueryString();
+
+        if (queryString == null) {
+            return "";
+        }
+
+        queryString = Ut.url.deleteQueryParam(queryString, paramName);
+
+        return queryString;
     }
 }
